@@ -1,5 +1,9 @@
 import React from 'react'
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import { RootStackParamList } from '../navigator/StackNavigator'
+import { StackScreenProps } from '@react-navigation/stack'
+
+interface Props extends StackScreenProps<RootStackParamList,'Inicio'>{};
 
 
 export const Inicio = () => {

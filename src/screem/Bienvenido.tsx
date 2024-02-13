@@ -1,10 +1,16 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ButtonsBienvenidos } from '../components/ButtonsBienvenidos';
+import { RootStackParamList } from '../navigator/StackNavigator';
+import { StackScreenProps } from '@react-navigation/stack';
 
 
 const image = {uri:'https://c0.wallpaperflare.com/preview/874/237/133/vegetable-stand-photo.jpg'};
 
-export const Bienvenido = () => {
+interface Props extends StackScreenProps<RootStackParamList,'Bienvenido'>{};
+
+
+export const Bienvenido = ({navigation}:any) => {
   return (
     <View style={styles.container}>
         <ImageBackground source={image} resizeMode='cover'
@@ -13,12 +19,8 @@ export const Bienvenido = () => {
                 <Text style={styles.tiulo1}>Welcome to</Text>
                 <Text style={styles.tiulo2}>MiniMarketExpress</Text>
             </View> 
-            <TouchableOpacity style={styles.btnLogIn}>
-                <Text style={styles.textBtn}>Log in</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnLogIn}>
-                <Text style={styles.textBtn}>Sign up</Text>
-            </TouchableOpacity>
+        <ButtonsBienvenidos title='Logn in' onPress={()=>navigation.navigate('Login')} />
+        <ButtonsBienvenidos title='Sign up' onPress={()=>navigation.navigate('Registro')}/>
         </ImageBackground>
     </View>
   )
@@ -26,15 +28,13 @@ export const Bienvenido = () => {
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
-        
+        flex:1,    
     },
 
     imageFondo:{
         flex:1,
         justifyContent:'center',
-        alignItems:'center',
-        
+        alignItems:'center',        
     },
 
     contentTitulo:{
@@ -56,20 +56,4 @@ const styles = StyleSheet.create({
         color:'#eafee7',   
     },
 
-    btnLogIn:{
-        width:160,
-        height:60,
-        backgroundColor:'#082c63',
-        borderRadius:30,
-        justifyContent:'center',
-        alignItems:'center',
-        marginBottom:20,
-        top:100
-    },
-
-    textBtn:{
-        color:'#eafee7',
-        fontSize:22,
-        fontWeight:'bold'
-    }
 })

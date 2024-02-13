@@ -1,44 +1,50 @@
-import React from 'react'
-import { StyleSheet, Text, View, TextInput, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { InputsComponents1 } from '../components/InputsComponents1';
+import { ButtonsComponents } from '../components/ButtonsComponents';
+import { styleGlobal } from '../theme/appTheme';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../navigator/StackNavigator';
 
 const imgFondo= {uri:'https://img.freepik.com/vector-gratis/fondo-fluido-morado_53876-99561.jpg?size=626&ext=jpg&ga=GA1.1.1208337363.1703221900&semt=ais'}
 
-export const Login = () => {
+interface Props extends StackScreenProps<RootStackParamList,'Login'>{};
+
+export const Login = ({navigation}:any) => {
+
+
+  //Hook para visualizar la contraseña
+  const [hiddenPassword, setHiddenPassword] = useState(true);
+
   return (
     <View style={styles.container}>
         <ImageBackground 
             source={imgFondo} resizeMode='cover'
-            style={styles.image}>
+            style={styleGlobal.image}>
 
         <Text style={styles.titulo}>Welcome</Text>
         <Text style={styles.subTitulo}>Sing in to your account</Text>
-        <TextInput 
-            style={styles.textInput}
-            placeholder='Email' 
-        />
-        <TextInput 
-            style={styles.textInput}
-            placeholder='Password'
-        />
 
+        <InputsComponents1 placeholder='Email'/>
+        <InputsComponents1 placeholder='Password'
+                           isPassword={hiddenPassword}/>
+        
         <TouchableOpacity>
-        <Text style={styles.forgotPass}>Forgot your password?</Text>
+            <Text style={styles.forgotPass}>Forgot your password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.boton}>
-            <Text style={styles.textBtn}>Sign in</Text>
-        </TouchableOpacity>
+        <ButtonsComponents title='Sign in' onPress={()=>navigation.navigate('Inicio')}/>
 
-        <TouchableOpacity style={styles.dontAccount}>
-            <Text style={styles.textDontAccount}>Don´t have an account? 
-            <Text style={styles.textSignUp}> Sign up</Text>
+        <TouchableOpacity style={styleGlobal.dontAccount}
+            onPress={()=>navigation.navigate('Registro')}>
+            <Text style={styleGlobal.textDontAccount}>Don´t have an account? 
+            <Text style={styleGlobal.textSignUp}> Sign up</Text>
             </Text>
         </TouchableOpacity>
 
         </ImageBackground>
 
         
-
     </View>
   )
 }
@@ -48,12 +54,6 @@ const styles=StyleSheet.create({
         flex:1,
     },
     
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems:'center'
-    },
-
     titulo:{
         fontSize:80,
         color:'#1a5cf6',
@@ -66,51 +66,12 @@ const styles=StyleSheet.create({
         color:'#fff',
         bottom:20      
     },
-
-    textInput:{
-        padding:10,
-        paddingStart:30,
-        width:'80%',
-        marginTop:20,
-        borderRadius:30,
-        backgroundColor:'#fff',
-        bottom:20,
-        fontSize:15
-    },
-    
+  
     forgotPass:{
         color:'#0452f1',
         fontSize:15
     },
 
-    boton:{
-        top:30,
-        backgroundColor:'#7f75df',
-        width:170,
-        height:60,
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:30
-    },
 
-    textBtn:{
-        fontSize:20,
-        fontWeight:'bold',
-        color:'#fff'
-    },
-
-    dontAccount:{
-        top:70,
-    },
-
-    textDontAccount:{
-        fontSize:15,
-        color:'black'
-    },
-
-    textSignUp:{
-        fontSize:15,
-        color:'#0452f1'
-    }
     
 })
