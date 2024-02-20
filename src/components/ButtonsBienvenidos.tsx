@@ -23,8 +23,7 @@ const styles=StyleSheet.create({
         borderRadius:30,
         justifyContent:'center',
         alignItems:'center',
-        marginBottom:20,
-        top:100
+        marginVertical:15
     },
 
     textBtn:{
